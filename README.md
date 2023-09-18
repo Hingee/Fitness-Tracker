@@ -1,2 +1,2 @@
 # Fitness-Tracker
-Making a fitness tracker program
+Making a fitness tracker program for a mobile phone
