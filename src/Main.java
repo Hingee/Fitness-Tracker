@@ -1,5 +1,7 @@
 package src;
 import java.awt.Dimension;
+import java.awt.Graphics;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -14,6 +16,11 @@ public class Main extends JFrame {
       public Canvas() {
         setPreferredSize(new Dimension(480, 800));
         tracker = new TrackerMenu();
+      }
+
+      @Override
+      public void paint(Graphics g) {
+        tracker.paint(g, getMousePosition());
       }
     }
 
