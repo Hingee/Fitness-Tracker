@@ -4,16 +4,14 @@ public class Exercise {
     String name;
     int sets;
     int repsPerSet;
-    int repRest;
-    int setRest;
+    int rest;
     String difficulty;
 
-    public Exercise(String n, int s, int rps, int rr, int sr, String diff) {
+    public Exercise(String n, int s, int rps, int r, String diff) {
        name = n;
        sets = s;
        repsPerSet = rps;
-       repRest = rr;
-       setRest = sr;
+       rest = r;
        difficulty=diff;
     }
 }
