@@ -7,11 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class HomePage extends Page {
-   private JTextField textField;
    private ArrayList<Workout> dataSource;
 
    public HomePage(ArrayList<Workout> var1, PageManager var3) {
@@ -23,7 +21,6 @@ public class HomePage extends Page {
    }
 
    protected void init() {
-      this.textField = new JTextField("", 40);
    }
 
    protected JPanel getTop() {
@@ -31,7 +28,6 @@ public class HomePage extends Page {
       var1.add(new JLabel(this.pageName, 0));
       JPanel var2 = new JPanel();
 
-      var2.add(this.textField);
       var1.add(var2);
       JPanel var3 = new JPanel();
       var1.add(var3);
@@ -44,11 +40,6 @@ public class HomePage extends Page {
     protected JPanel getCenter() {
         JPanel var1 = new JPanel();
         var1.setLayout(new BorderLayout());
-    //   if (this.isPlayerInventory) {
-    //      this.dataSource = new ArrayList(this.player.getInventory().searchItems(var2));
-    //   } else {
-    //      this.dataSource = new ArrayList(this.player.getStorageView().searchItems(var2));
-    //   }
 
         this.dataSource.sort((var0, var1x) -> {
             return var0.getName().compareToIgnoreCase(var1x.getName());

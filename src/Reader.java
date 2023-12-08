@@ -109,8 +109,8 @@ public class Reader {
             }
             int sets = Integer.valueOf(parts[1].trim());
             int repsPerSet = Integer.valueOf(parts[2].trim());
-            int restMinRep = Integer.valueOf(parts[3].trim());
-            int restMinSet = Integer.valueOf(parts[4].trim());
+            float restMinRep = Float.valueOf(parts[3].trim());
+            float restMinSet = Float.valueOf(parts[4].trim());
             String difficulty = parts[5].trim();
 
             Exercise exercise = new Exercise(name, sets, repsPerSet, restMinRep, restMinSet, difficulty);

@@ -4,11 +4,11 @@ public class Exercise {
     String name;
     int sets;
     int repsPerSet;
-    int restMinRep;
-    int restMinSet;
+    float restMinRep;
+    float restMinSet;
     String difficulty;
 
-    public Exercise(String n, int s, int rps, int rRep, int rSet, String diff) {
+    public Exercise(String n, int s, int rps, float rRep, float rSet, String diff) {
        name = n;
        sets = s;
        repsPerSet = rps;
@@ -29,11 +29,11 @@ public class Exercise {
         return repsPerSet;
     }
 
-    public int getRestMinRep() {
+    public float getRestMinRep() {
         return restMinRep;
     }
 
-    public int getRestMinSet() {
+    public float getRestMinSet() {
         return restMinSet;
     }
 
