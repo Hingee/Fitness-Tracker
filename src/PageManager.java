@@ -9,36 +9,36 @@ import java.util.Stack;
 import javax.swing.JPanel;
 
 public class PageManager {
-   private Player player;
-   private Storage store;
+   private ArrayList<Workout> workouts;
+   private ArrayList<Exercise> exercises;
    private CardLayout cardLayout;
    private JPanel cardPanel;
    private Stack<String> history;
    private ArrayList<Page> pages;
 
-   public PageManager(Player var1, Storage var2) {
-      this.player = var1;
-      this.store = var2;
+   public PageManager(ArrayList<Workout> var1, ArrayList<Exercise> var2) {
+      this.workouts = var1;
+      this.exercises = var2;
       this.history = new Stack();
       this.pages = new ArrayList();
-      InventoryPage var3 = new InventoryPage(this.player, this.store, this, true);
-      InventoryPage var4 = new InventoryPage(this.player, this.store, this, false);
-      ItemCraftPage var5 = new ItemCraftPage(this.player, this.store, this);
-      ProductPage var6 = new ProductPage(this.player, this.store, this);
+      HomePage var3 = new HomePage(this.workouts, this);
+      WorkoutPage var4 = new WorkoutPage(this.exercises, this);
+      ExercisePage var5 = new ExercisePage(this);
+      //ProfilePage var6 = new ProfilePage(this.exercises, this.workouts, this);
       this.pages.add(var3);
       this.pages.add(var4);
       this.pages.add(var5);
-      this.pages.add(var6);
+      //this.pages.add(var6);
       this.cardLayout = new CardLayout();
       this.cardPanel = new JPanel(this.cardLayout);
-      this.cardPanel.setPreferredSize(new Dimension(1024, 768));
-      this.cardPanel.add(var3, "player-inventory");
-      this.cardPanel.add(var4, "storage-inventory");
-      this.cardPanel.add(var5, "crafting-page");
-      this.cardPanel.add(var6, "product");
-      this.cardLayout.show(this.cardPanel, "player-inventory");
-      this.history.push("storage-inventory");
-      this.forward("player-inventory");
+      this.cardPanel.setPreferredSize(new Dimension(480, 800));
+      this.cardPanel.add(var3, "Home");
+      this.cardPanel.add(var4, "Workout-Page");
+      this.cardPanel.add(var5, "Exercise-page");
+      //this.cardPanel.add(var6, "product");
+      this.cardLayout.show(this.cardPanel, "Home");
+      this.history.push("WorkoutPage");
+      this.forward("Home");
    }
 
    Page getActivePage() {
@@ -90,7 +90,7 @@ public class PageManager {
    }
 
    private boolean isTopLevelPage(String var1) {
-      return var1.contains("inventory") || var1.equals("crafting-page");
+      return var1.contains("Exercises") || var1.equals("Exercise-Page");
    }
 
    public void back() {

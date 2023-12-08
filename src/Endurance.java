@@ -1,9 +1,7 @@
 package src;
-import java.sql.Time;
-import java.util.ArrayList;
 
 public class Endurance extends Workout {
-    public Endurance(String name, String desc, Time est, ArrayList<Exercise> exercise) {
+    public Endurance(String name, String desc, int est, String[] exercise) {
         super(name, desc, est, exercise);
     }
 }

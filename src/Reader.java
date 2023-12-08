@@ -29,9 +29,7 @@ package src;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Reader {
@@ -52,17 +50,17 @@ public class Reader {
             e.printStackTrace();
             System.exit(0);
         }
-        ArrayList<Exercise> exercises;
-        ArrayList<Exercise> workouts;
+        ArrayList<Exercise> exercises = new ArrayList<>();
+        ArrayList<Workout> workouts = new ArrayList<>();
 
         String line = "";
         while (scanner.hasNextLine()) {
             line = scanner.nextLine();
             if (!line.isEmpty() && line.charAt(0) == '-') {
                 if (line.endsWith("Exercises")) {
-                    readExercises(scanner, exercises);
+                    exercises = readExercises(scanner, exercises);
                 } else if (line.endsWith("Workouts")) {
-                    readWorkouts(scanner, workouts);
+                    workouts = readWorkouts(scanner, workouts);
                 }
             }
         }
@@ -71,6 +69,9 @@ public class Reader {
     }
 
     private static boolean duplicateExercise(String name, ArrayList<Exercise> exercises) {
+        if(exercises == null) {
+            return false;
+        }
         for (Exercise exercise : exercises) {
             if (exercise.getName().equalsIgnoreCase(name)) {
                 return true;
@@ -90,7 +91,7 @@ public class Reader {
 
     // line format
     // {NAME}, {DESCRIPTION}, {WEIGHT}, ...
-    private static void readExercises(Scanner sc, ArrayList<Exercise> exercises) {
+    private static ArrayList<Exercise> readExercises(Scanner sc, ArrayList<Exercise> exercises) {
         if (Reader.exercisesRead) {
             System.err.println("Exercises in data file are not stored together");
             System.exit(0);
@@ -102,27 +103,29 @@ public class Reader {
             String name = parts[0].trim();
             // Disallow duplicate item names
             if (Reader.duplicateExercise(name, exercises)) {
-                String err = String.format("The item name '%s' is used multiple times", name);
+                String err = String.format("The exercise '%s' is used multiple times", name);
                 System.err.println(err);
                 System.exit(0);
             }
             int sets = Integer.valueOf(parts[1].trim());
             int repsPerSet = Integer.valueOf(parts[2].trim());
-            Time restMin = Time.valueOf(parts[3].trim());
-            String difficulty = parts[4].trim();
+            int restMinRep = Integer.valueOf(parts[3].trim());
+            int restMinSet = Integer.valueOf(parts[4].trim());
+            String difficulty = parts[5].trim();
 
-            Exercise exercise = new Exercise(name, sets, repsPerSet, restMin, difficulty);
+            Exercise exercise = new Exercise(name, sets, repsPerSet, restMinRep, restMinSet, difficulty);
             exercises.add(exercise);
             itemLine = sc.nextLine();
         } while (sc.hasNextLine() && !itemLine.isEmpty());
 
+        return exercises;
     }
 
     // line format
     // {NAME}, {DESCRIPTION}, {COMPONENT 1}, {COMPONENT 2}, ...
-    private static void readWorkouts(Scanner sc, ArrayList<ItemDefinition> defs) {
+    private static ArrayList<Workout> readWorkouts(Scanner sc, ArrayList<Workout> workouts) {
         if (Reader.workoutsRead) {
-            System.err.println("Craftable Items in data file are not stored together");
+            System.err.println("Workouts in data file are not stored together");
             System.exit(0);
         }
         Reader.workoutsRead = true;
@@ -130,78 +133,41 @@ public class Reader {
         String itemLine = sc.nextLine();
         do {
             String[] parts = itemLine.split(",");
-            
-            String name = parts[0].trim();
+            String type = parts[0].trim();
+            if(type.equals("END")) {
+                break;
+            }
+            String name = parts[1].trim();
             // Disallow duplicate item names
-            if (Reader.duplicateItemName(name, defs)) {
-                String err = String.format("The item '%s' is defined multiple times", name);
+            if (Reader.duplicateWorkout(name, workouts)) {
+                String err = String.format("The workout '%s' is defined multiple times", name);
                 System.err.println(err);
                 System.exit(0);
             }
-            String description = parts[1].trim();
+            String description = parts[2].trim();
+            int est = Integer.valueOf(parts[3].trim());
 
-            // 
-
-            String[] components = new String[parts.length - 2];
-            for (int i = 2; i < parts.length; i++) {
-                components[i - 2] = parts[i].trim();
+            String[] exercises = new String[parts.length - 4];
+            for (int i = 4; i < parts.length; i++) {
+                exercises[i - 4] = parts[i].trim();
             }
-            
-            ItemDefinition itemDefinition = new ItemDefinition(name, description, Optional.empty(), components);
-            
-            defs.add(itemDefinition);
+
+            Workout workout;
+            if(type.equals("PE")) {
+                workout = new PowerEndurance(name, description, est, exercises);
+            } else if(type.equals("E")) {
+                workout = new Endurance(name, description, est, exercises);
+            } else if (type.equals("SNP")) {
+                workout = new StrengthNPower(name, description, est, exercises);
+            }else{
+                workout = new Fingers(name, description, est, exercises);
+            }
+                       
+            workouts.add(workout);
             itemLine = sc.nextLine();
-        } while (sc.hasNextLine() && !itemLine.isEmpty());
+        } while (!itemLine.isEmpty() && sc.hasNextLine());
 
-    }
-
-    /**
-     * Line format:
-     * {NAME | WEIGHT CAPACITY}, {ITEM NAME}, {QTY}, {ITEM NAME}, {QTY}, ...
-     * @param data - The result of splitting the `player` or `store` line of the config by ","
-     * @return
-     */
-    private static Inventory readStartingItems(
-        Scanner sc,
-        ArrayList<ItemDefinition> itemDefinitions
-    ) {
-        Inventory startingInventory = new Inventory();
-
-        String line = sc.nextLine();
-        while (!line.isEmpty() && sc.hasNextLine()) {
-            String[] data = line.split(",");
-            String name = data[0].trim();
-            int qty = Integer.valueOf(data[1].trim());
-    
-            getItemDef(name, itemDefinitions).ifPresentOrElse(
-                (def) -> {
-                    for (int i = 0; i < qty; i++) {
-                        startingInventory.addOne(def.create());
-                    }
-                },
-                () -> {
-                    System.err.println("Bad starting item '" + name + "' was read. Exiting early");
-                    System.exit(0);
-                });
-            line = sc.nextLine();
-        }
-        // One left behind
-        String[] data = line.split(",");
-        if (!line.isBlank()) {
-            int qty = Integer.valueOf(data[1].trim());
-            getItemDef(data[0], itemDefinitions).ifPresentOrElse(
-                (def) -> {
-                    for (int i = 0; i < qty; i++) {
-                        startingInventory.addOne(def.create());
-                    }
-                },
-                () -> {
-                    System.err.println("Bad starting item '" + data[0] + "' was read. Exiting early");
-                    System.exit(0);
-                });
-        }
-
-        return startingInventory;
+        return workouts;
     }
 }
 

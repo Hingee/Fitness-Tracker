@@ -1,22 +1,43 @@
 package src;
-import java.sql.Time;
 
 public class Exercise {
     String name;
     int sets;
     int repsPerSet;
-    Time restMin;
+    int restMinRep;
+    int restMinSet;
     String difficulty;
 
-    public Exercise(String n, int s, int rps, Time r, String diff) {
+    public Exercise(String n, int s, int rps, int rRep, int rSet, String diff) {
        name = n;
        sets = s;
        repsPerSet = rps;
-       restMin = r;
+       restMinRep = rRep;
+       restMinSet = rSet;
        difficulty=diff;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getSets() {
+        return sets;
+    }
+
+    public int getRepsPerSet() {
+        return repsPerSet;
+    }
+
+    public int getRestMinRep() {
+        return restMinRep;
+    }
+
+    public int getRestMinSet() {
+        return restMinSet;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
     }
 }

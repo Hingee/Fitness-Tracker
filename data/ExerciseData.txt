@@ -1,4 +1,7 @@
 - Exercises
-Weighted Pullups, 5, 3, 3, 2RM
+Weighted Pullups, 5, 3, 3, 3, 2RM
+Linked Boulders, 3, 4, 2, 5, Flash Grade
 
 - Workouts
+PE, Linked Boulders, Find 1-3 boulder problems that are 12 moves long and is around your flash grade., 45, Linked Boulders
+END

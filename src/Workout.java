@@ -1,14 +1,12 @@
 package src;
-import java.sql.Time;
-import java.util.ArrayList;
 
-public class Workout {
+public abstract class Workout {
     public String name;
     public String desc;
-    public Time est;
-    public ArrayList<Exercise> exercises = new ArrayList<>();
+    public int est;
+    public String[] exercises;
 
-    public Workout(String n, String d, Time e, ArrayList<Exercise> ex) {
+    public Workout(String n, String d, int e, String[] ex) {
         name = n;
         desc = d;
         est = e;
@@ -17,5 +15,13 @@ public class Workout {
 
     public String getName() {
         return name;
+    }
+
+    public String getDescription() {
+        return desc;
+    }
+
+    public int getEst() {
+        return est;
     }
 }
