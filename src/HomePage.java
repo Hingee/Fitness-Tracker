@@ -40,7 +40,7 @@ public class HomePage extends Page {
     protected JPanel getCenter() {
         JPanel var1 = new JPanel();
         var1.setLayout(new BorderLayout());
-
+        this.dataSource = this.workouts;
         this.dataSource.sort((var0, var1x) -> {
             return var0.getName().compareToIgnoreCase(var1x.getName());
         });
@@ -78,8 +78,8 @@ public class HomePage extends Page {
     }
 
     private void goToWorkoutPage(Workout var5) {
-        WorkoutPage.setDisplayItem(var5, true);
-        this.manager.forward("product");
+        WorkoutPage.setDisplayItem(var5);
+        this.manager.forward("Workout-Page");
     }
 
     protected JPanel getBottom() {
