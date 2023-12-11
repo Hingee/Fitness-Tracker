@@ -2,37 +2,18 @@ package src;
 // Source code is decompiled from a .class file using FernFlower decompiler.
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public abstract class Page extends JPanel {
-   protected ArrayList<Workout> workouts;
-   protected ArrayList<Exercise> exercises;
    protected String pageName;
    protected PageManager manager;
    protected boolean showBack;
 
-   Page(String var1, ArrayList<Workout> var2, PageManager var3, boolean var4) {
+   Page(String var1, PageManager pageMan) {
       this.init();
       this.pageName = var1;
-      this.workouts = var2;
-      this.manager = var3;
-      this.showBack = var4;
-   }
-
-   Page(String var1, ArrayList<Exercise> var2, PageManager var3) {
-      this.init();
-      this.pageName = var1;
-      this.exercises = var2;
-      this.manager = var3;
-      this.showBack = false;
-   }
-
-      Page(String var1, PageManager var3) {
-      this.init();
-      this.pageName = var1;
-      this.manager = var3;
+      this.manager = pageMan;
       this.showBack = false;
    }
 

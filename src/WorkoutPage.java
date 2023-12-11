@@ -10,15 +10,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class WorkoutPage extends Page {
-   public static Workout displayItem;
+   public static Workout displayItem = null;
    public boolean fromPlayer;
    private ArrayList<Exercise> dataSource;
 
-   public WorkoutPage(ArrayList<Exercise> var1, PageManager var3) {
-      super("", var1, var3);
-      this.manager = var3;
+   public WorkoutPage(PageManager pageMan) {
+      super("", pageMan);
+      this.manager = pageMan;
       this.pageName = "Workout";
-      dataSource = var1;
+      dataSource = DataSource.getExercises();
       this.buildPage();
    }
 
@@ -43,7 +43,9 @@ public class WorkoutPage extends Page {
       JPanel var1 = new JPanel();
       var1.setLayout(new BorderLayout());
 
-
+      if(displayItem!=null) {
+         dataSource = displayItem.getExercises();
+      }
       this.dataSource.sort((var0, var1x) -> {
           return var0.getName().compareToIgnoreCase(var1x.getName());
       });
@@ -54,8 +56,8 @@ public class WorkoutPage extends Page {
           var3[var4][0] = var5.getName();
           var3[var4][1] = ""+var5.getSets();
           var3[var4][2] = "" + var5.getRepsPerSet();
-          var3[var4][3] = "" + var5.getRestMinRep();
-          var3[var4][4] = "" + var5.getRestMinSet();
+          var3[var4][3] = "" + var5.getRestMinRep()+" mins";
+          var3[var4][4] = "" + var5.getRestMinSet()+" mins";
           var3[var4][5] = var5.getDifficulty();
       }
 
@@ -98,10 +100,5 @@ public class WorkoutPage extends Page {
 
    public static void setDisplayItem(Workout var5) {
       displayItem = var5;
-      editExercises();
-   }
-
-   private static void editExercises() {
-      //dataSource = displayItem.getExercises(dataSource); //make a singelton class too solve this
    }
 }

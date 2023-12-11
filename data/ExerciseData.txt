@@ -5,5 +5,5 @@ Repeaters, 4, 3, 0.03, 1.0, MAX
 
 - Workouts
 PE, Linked Boulders, Find 1-3 boulder problems that are 12 moves long and is around your flash grade., 45, Linked Boulders
-F, HangBoard A, Increases short repeated endurance, 20, Repeaters, Linked Boulders
+F, HangBoard A, Increases short repeated endurance, 20, Repeaters
 END

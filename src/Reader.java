@@ -35,13 +35,14 @@ import java.util.Scanner;
 public class Reader {
     private static boolean exercisesRead;
     private static boolean workoutsRead;
+    static DataSource data = DataSource.getInstance();
 
     static {
         exercisesRead = false;
         workoutsRead = false;
     }
 
-    public static App read(String filePath) {
+    public static App read(String filePath) throws Exception {
         File file = new File(filePath);
         Scanner scanner = null;
         try {
@@ -59,13 +60,15 @@ public class Reader {
             if (!line.isEmpty() && line.charAt(0) == '-') {
                 if (line.endsWith("Exercises")) {
                     exercises = readExercises(scanner, exercises);
+                    data.setExercises(exercises);
                 } else if (line.endsWith("Workouts")) {
                     workouts = readWorkouts(scanner, workouts);
+                    data.setWorkouts(workouts);
                 }
             }
         }
 
-        return new App(exercises, workouts);
+        return new App();
     }
 
     private static boolean duplicateExercise(String name, ArrayList<Exercise> exercises) {
@@ -123,7 +126,7 @@ public class Reader {
 
     // line format
     // {NAME}, {DESCRIPTION}, {COMPONENT 1}, {COMPONENT 2}, ...
-    private static ArrayList<Workout> readWorkouts(Scanner sc, ArrayList<Workout> workouts) {
+    private static ArrayList<Workout> readWorkouts(Scanner sc, ArrayList<Workout> workouts) throws Exception {
         if (Reader.workoutsRead) {
             System.err.println("Workouts in data file are not stored together");
             System.exit(0);
@@ -147,9 +150,12 @@ public class Reader {
             String description = parts[2].trim();
             int est = Integer.valueOf(parts[3].trim());
 
-            String[] exercises = new String[parts.length - 4];
+            ArrayList<Exercise> exercises = new ArrayList<>();
             for (int i = 4; i < parts.length; i++) {
-                exercises[i - 4] = parts[i].trim();
+                if(DataSource.getExerciseByName(parts[i].trim()).isEmpty()) {
+                    throw new Exception("Exercise does not exist");
+                }
+                exercises.add(DataSource.getExerciseByName(parts[i].trim()).get());
             }
 
             Workout workout;

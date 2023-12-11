@@ -12,11 +12,11 @@ import javax.swing.table.DefaultTableModel;
 public class HomePage extends Page {
    private ArrayList<Workout> dataSource;
 
-   public HomePage(ArrayList<Workout> var1, PageManager var3) {
-      super("", var1, var3, false);
-      this.manager = var3;
+   public HomePage(PageManager pageMan) {
+      super("", pageMan);
+      this.manager = pageMan;
       this.pageName = "Home";
-      dataSource = var1;
+      dataSource = DataSource.getWorkouts();
       this.buildPage();
    }
 
@@ -40,7 +40,6 @@ public class HomePage extends Page {
     protected JPanel getCenter() {
         JPanel var1 = new JPanel();
         var1.setLayout(new BorderLayout());
-        this.dataSource = this.workouts;
         this.dataSource.sort((var0, var1x) -> {
             return var0.getName().compareToIgnoreCase(var1x.getName());
         });
@@ -50,7 +49,7 @@ public class HomePage extends Page {
             Workout var5 = (Workout)this.dataSource.get(var4);
             var3[var4][0] = var5.getName();
             var3[var4][1] = var5.getDescription();
-            var3[var4][2] = "" + var5.getEst();
+            var3[var4][2] = "" + var5.getEst()+" mins";
         }
 
         String[] var8 = new String[]{"Name", "Description", "Estimated Time"};

@@ -9,20 +9,16 @@ import java.util.Stack;
 import javax.swing.JPanel;
 
 public class PageManager {
-   private ArrayList<Workout> workouts;
-   private ArrayList<Exercise> exercises;
    private CardLayout cardLayout;
    private JPanel cardPanel;
    private Stack<String> history;
    private ArrayList<Page> pages;
 
-   public PageManager(ArrayList<Workout> var1, ArrayList<Exercise> var2) {
-      this.workouts = var1;
-      this.exercises = var2;
+   public PageManager() {
       this.history = new Stack();
       this.pages = new ArrayList();
-      HomePage var3 = new HomePage(this.workouts, this);
-      WorkoutPage var4 = new WorkoutPage(this.exercises, this);
+      HomePage var3 = new HomePage(this);
+      WorkoutPage var4 = new WorkoutPage(this);
       ExercisePage var5 = new ExercisePage(this);
       //ProfilePage var6 = new ProfilePage(this.exercises, this.workouts, this);
       this.pages.add(var3);
