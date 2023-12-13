@@ -1,6 +1,6 @@
 - Exercises
-Weighted Pullups, 5, 3, 3, 3, 2RM
-Linked Boulders, 3, 4, 2, 5, Flash Grade
+Weighted Pullups, 5, 3, 3.0, 3.0, 2RM
+Linked Boulders, 3, 4, 2.0, 5.0, Flash Grade
 Repeaters, 4, 3, 0.03, 1.0, MAX
 
 - Workouts

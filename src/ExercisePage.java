@@ -47,12 +47,17 @@ public class ExercisePage extends Page {
          var6.add(Box.createHorizontalGlue());
          var2.add(var6);
          
-         JLabel var11 = new JLabel("Rest between reps: "+displayItem.getRestMinRep()+" mins");
+         float restRep = displayItem.getRestMinRep();
+         String restResult;
+         restResult = checkSecs(restRep);
+         JLabel var11 = new JLabel("Rest between reps: "+restResult);
          var10.add(var11);
          var10.add(Box.createHorizontalGlue());
          var2.add(var10);
 
-         JLabel var12 = new JLabel("Rest between sets: "+displayItem.getRestMinSet()+" mins");
+         float restSet = displayItem.getRestMinSet();
+         restResult = checkSecs(restSet);
+         JLabel var12 = new JLabel("Rest between sets: "+restResult);
          var11.add(var12);
          var11.add(Box.createHorizontalGlue());
          var2.add(var11);

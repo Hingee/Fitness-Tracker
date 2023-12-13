@@ -55,8 +55,14 @@ public class WorkoutPage extends Page {
           var3[var4][0] = var5.getName();
           var3[var4][1] = ""+var5.getSets();
           var3[var4][2] = "" + var5.getRepsPerSet();
-          var3[var4][3] = "" + var5.getRestMinRep()+" mins";
-          var3[var4][4] = "" + var5.getRestMinSet()+" mins";
+          float restRep = var5.getRestMinRep();
+          String restResult;
+          restResult = checkSecs(restRep);
+          var3[var4][3] = restResult;
+
+          float restSet = var5.getRestMinSet();
+          restResult = checkSecs(restSet);
+          var3[var4][4] = restResult;
           var3[var4][5] = var5.getDifficulty();
       }
 
@@ -96,6 +102,8 @@ public class WorkoutPage extends Page {
       var1.add(var3);
       return var1;
   }
+
+
 
    public static void setDisplayItem(Workout var5) {
       displayItem = var5;

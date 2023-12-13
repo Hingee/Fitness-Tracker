@@ -40,4 +40,13 @@ public abstract class Page extends JPanel {
    protected abstract JPanel getCenter();
 
    protected abstract JPanel getBottom();
+
+   public String checkSecs(float a) {
+      String timeUnit = " mins";
+      if(a<1) {
+         timeUnit = " secs";
+         a = a*100;
+      }
+      return a+timeUnit;
+   }
 }
