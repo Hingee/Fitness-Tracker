@@ -1,5 +1,4 @@
 package src;
-// Source code is decompiled from a .class file using FernFlower decompiler.
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;

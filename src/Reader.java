@@ -7,23 +7,12 @@ package src;
  * 
  * File format:
  * 
- * - base items
- * {NAME}, {DESCRIPTION}, {WEIGHT}
+ * - Exercises
+ * {name}, {sets}, {repsPerSet}, {restMinRep}, {restMinSet}, {difficulty}
  * 
- * - craftable items
- * {NAME}, {DESCRIPTION}, {COMPONENT 1}, {COMPONENT 2}, ...
- * 
- * - store
- * {STORAGE NAME}
- * {ITEM NAME}, {QTY}
- * {ITEM NAME}, {QTY}
- * ...
- * 
- * - player
- * {WEIGHT CAPACITY}
- * {ITEM NAME}, {QTY}
- * {ITEM NAME}, {QTY}
- * ...
+ * - Workouts
+ * {type}, {name}, {description}, {estimated time}, {Exercise 1}, {Exercise 2}, ...
+ * END
  * 
  */
 
@@ -93,7 +82,7 @@ public class Reader {
     }
 
     // line format
-    // {NAME}, {DESCRIPTION}, {WEIGHT}, ...
+    // {name}, {sets}, {repsPerSet}, {restMinRep}, {restMinSet}, {difficulty}
     private static ArrayList<Exercise> readExercises(Scanner sc, ArrayList<Exercise> exercises) {
         if (Reader.exercisesRead) {
             System.err.println("Exercises in data file are not stored together");
@@ -125,7 +114,7 @@ public class Reader {
     }
 
     // line format
-    // {NAME}, {DESCRIPTION}, {COMPONENT 1}, {COMPONENT 2}, ...
+    // {type}, {name}, {description}, {estimated time}, {Exercise 1}, {Exercise 2}, ...
     private static ArrayList<Workout> readWorkouts(Scanner sc, ArrayList<Workout> workouts) throws Exception {
         if (Reader.workoutsRead) {
             System.err.println("Workouts in data file are not stored together");
@@ -141,7 +130,7 @@ public class Reader {
                 break;
             }
             String name = parts[1].trim();
-            // Disallow duplicate item names
+            // Disallow duplicate names
             if (Reader.duplicateWorkout(name, workouts)) {
                 String err = String.format("The workout '%s' is defined multiple times", name);
                 System.err.println(err);

@@ -1,5 +1,4 @@
 package src;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -87,7 +86,7 @@ public class WorkoutPage extends Page {
 
   private void goToExercisePage(Exercise var5) {
       ExercisePage.setDisplayItem(var5, true);
-      this.manager.forward("product");
+      this.manager.forward("Exercise-page");
   }
 
   protected JPanel getBottom() {

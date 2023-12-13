@@ -1,5 +1,4 @@
 package src;
-
 import java.util.ArrayList;
 
 public class PowerEndurance extends Workout{

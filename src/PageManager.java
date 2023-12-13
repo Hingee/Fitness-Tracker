@@ -1,6 +1,4 @@
 package src;
-
-// Source code is decompiled from a .class file using FernFlower decompiler.
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;

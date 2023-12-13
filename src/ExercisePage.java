@@ -1,14 +1,10 @@
 package src;
 
-// Source code is decompiled from a .class file using FernFlower decompiler.
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 public class ExercisePage extends Page {
    public static Exercise displayItem;
@@ -41,30 +37,22 @@ public class ExercisePage extends Page {
          var2.add(var3);
          Box var5 = Box.createHorizontalBox();
 
-         JLabel var6 = new JLabel("Sets: ");
+         JLabel var6 = new JLabel("Sets: "+displayItem.getSets());
          var5.add(var6);
          var5.add(Box.createHorizontalGlue());
          var2.add(var5);
-         JTextArea var7 = new JTextArea(""+displayItem.getSets());
-         var7.setWrapStyleWord(true);
-         var7.setLineWrap(true);
-         var7.setEditable(false);
-         JScrollPane var8 = new JScrollPane(var7);
-         var8.setPreferredSize(new Dimension(800, 200));
-         var2.add(var8);
-         Box var9 = Box.createHorizontalBox();
-
-         JLabel var10 = new JLabel("Reps: "+displayItem.getRepsPerSet());
-         var9.add(var10);
-         var9.add(Box.createHorizontalGlue());
-         var2.add(var9);
          
-         JLabel var11 = new JLabel("Rest between reps: "+displayItem.getRestMinRep());
+         JLabel var10 = new JLabel("Reps: "+displayItem.getRepsPerSet());
+         var6.add(var10);
+         var6.add(Box.createHorizontalGlue());
+         var2.add(var6);
+         
+         JLabel var11 = new JLabel("Rest between reps: "+displayItem.getRestMinRep()+" mins");
          var10.add(var11);
          var10.add(Box.createHorizontalGlue());
          var2.add(var10);
 
-         JLabel var12 = new JLabel("Rest between sets: "+displayItem.getRestMinSet());
+         JLabel var12 = new JLabel("Rest between sets: "+displayItem.getRestMinSet()+" mins");
          var11.add(var12);
          var11.add(Box.createHorizontalGlue());
          var2.add(var11);
