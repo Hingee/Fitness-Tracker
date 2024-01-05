@@ -14,6 +14,11 @@ public abstract class Page extends JPanel {
       this.pageName = var1;
       this.manager = pageMan;
       this.showBack = false;
+      if (var1.equals("Home")) {
+         this.showBack = false;
+      } else {
+         this.showBack = true;
+      }
    }
 
    public String getName() {
@@ -33,13 +38,19 @@ public abstract class Page extends JPanel {
    protected JPanel getTop() {
       JPanel var1 = new JPanel();
       var1.setLayout(new GridLayout(2, 0));
+      var1.add(new TopNavigationBar(this.manager, this.showBack));
       var1.add(new JLabel(this.pageName, 0));
       return var1;
    }
 
    protected abstract JPanel getCenter();
 
-   protected abstract JPanel getBottom();
+   protected JPanel getBottom() {
+      JPanel var1 = new JPanel();
+      var1.setLayout(new GridLayout(1, 0));
+      var1.add(new BottomNavigationBar(this.manager, this.showBack));
+      return var1;
+   }
 
    public String checkSecs(float a) {
       String timeUnit = " mins";

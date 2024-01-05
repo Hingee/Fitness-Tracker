@@ -1,7 +1,6 @@
 package src;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,28 +12,11 @@ public class HomePage extends Page {
    private ArrayList<Workout> dataSource;
 
    public HomePage(PageManager pageMan) {
-      super("", pageMan);
-      this.manager = pageMan;
-      this.pageName = "Home";
+      super("Home", pageMan);
       dataSource = DataSource.getWorkouts();
-      this.buildPage();
    }
 
    protected void init() {
-   }
-
-   protected JPanel getTop() {
-      JPanel var1 = new JPanel(new GridLayout(6, 0));
-      var1.add(new JLabel(this.pageName, 0));
-      JPanel var2 = new JPanel();
-
-      var1.add(var2);
-      JPanel var3 = new JPanel();
-      var1.add(var3);
-
-      JPanel var5 = new JPanel(new BorderLayout());
-      var5.add(var1, "Center");
-      return var5;
    }
 
     protected JPanel getCenter() {

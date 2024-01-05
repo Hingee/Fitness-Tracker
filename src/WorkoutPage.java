@@ -1,41 +1,22 @@
 package src;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.util.ArrayList;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class WorkoutPage extends Page {
-   public static Workout displayItem = null;
+   public static Workout displayItem;
    public boolean fromPlayer;
    private ArrayList<Exercise> dataSource;
 
    public WorkoutPage(PageManager pageMan) {
-      super("", pageMan);
-      this.manager = pageMan;
-      this.pageName = "Workout";
+      super("Workout", pageMan);
       dataSource = DataSource.getExercises();
-      this.buildPage();
    }
 
    protected void init() {
-   }
-
-   protected JPanel getTop() {
-      JPanel var1 = new JPanel(new GridLayout(6, 0));
-      var1.add(new JLabel(this.pageName, 0));
-      JPanel var2 = new JPanel();
-
-      var1.add(var2);
-      JPanel var3 = new JPanel();
-      var1.add(var3);
-
-      JPanel var5 = new JPanel(new BorderLayout());
-      var5.add(var1, "Center");
-      return var5;
    }
 
    protected JPanel getCenter() {
@@ -94,16 +75,6 @@ public class WorkoutPage extends Page {
       ExercisePage.setDisplayItem(var5, true);
       this.manager.forward("Exercise-page");
   }
-
-  protected JPanel getBottom() {
-      JPanel var1 = new JPanel();
-      String var2 = String.format("");
-      JLabel var3 = new JLabel(var2);
-      var1.add(var3);
-      return var1;
-  }
-
-
 
    public static void setDisplayItem(Workout var5) {
       displayItem = var5;

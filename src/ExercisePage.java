@@ -1,7 +1,5 @@
 package src;
-
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -70,10 +68,5 @@ public class ExercisePage extends Page {
          var1.add(var2);
          return var1;
       }
-   }
-
-   public JPanel getBottom() {
-      JPanel var1 = new JPanel(new GridLayout(2, 0));
-      return var1;
    }
 }
