@@ -14,7 +14,7 @@ public abstract class Page extends JPanel {
       this.pageName = var1;
       this.manager = pageMan;
       this.showBack = false;
-      if (var1.equals("Home")) {
+      if (var1.equals("home-page")) {
          this.showBack = false;
       } else {
          this.showBack = true;

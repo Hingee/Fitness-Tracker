@@ -13,21 +13,21 @@ public class TopNavigationBar extends JPanel {
       var5.addActionListener((var1x) -> {
          var1.forward("analytics-page");
       });
-      JButton var6 = new JButton("Logbook");
+      JButton var6 = new JButton("Scheduler");
       var6.addActionListener((var1x) -> {
-         var1.forward("logbook-page");
+         var1.forward("scheduler-page");
       });
       JButton var7 = new JButton("Profile");
       var7.addActionListener((var1x) -> {
          var1.forward("profile-page");
       });
       JButton var8 = new JButton("Other Users");
-      var7.addActionListener((var1x) -> {
+      var8.addActionListener((var1x) -> {
          var1.forward("otherUsers-page");
       });
       JButton var9 = new JButton("Home");
-      var7.addActionListener((var1x) -> {
-         var1.forward("Home");
+      var9.addActionListener((var1x) -> {
+         var1.forward("home-page");
       });
       var4.add(var9);
       var4.add(var5);

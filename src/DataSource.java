@@ -1,7 +1,7 @@
 package src;
 import java.util.ArrayList;
 import java.util.Optional;
-
+//Singelton
 public class DataSource {
     private static DataSource instance = null;
     private static ArrayList<Exercise> exercises;

@@ -18,21 +18,32 @@ public class PageManager {
       HomePage var3 = new HomePage(this);
       WorkoutPage var4 = new WorkoutPage(this);
       ExercisePage var5 = new ExercisePage(this);
-      //ProfilePage var6 = new ProfilePage(this.exercises, this.workouts, this);
+      AnalyticsPage var6 = new AnalyticsPage(this);
+      SchedulePage var7 = new SchedulePage(this);
+      ProfilePage var8 = new ProfilePage(this);
+      OtherUsersPage var9 = new OtherUsersPage(this);
+
       this.pages.add(var3);
       this.pages.add(var4);
       this.pages.add(var5);
-      //this.pages.add(var6);
+      this.pages.add(var6);
+      this.pages.add(var7);
+      this.pages.add(var8);
+      this.pages.add(var9);
+
       this.cardLayout = new CardLayout();
       this.cardPanel = new JPanel(this.cardLayout);
       this.cardPanel.setPreferredSize(new Dimension(480, 800));
-      this.cardPanel.add(var3, "Home");
+      this.cardPanel.add(var3, "home-page");
       this.cardPanel.add(var4, "Workout-Page");
       this.cardPanel.add(var5, "Exercise-page");
-      //this.cardPanel.add(var6, "product");
+      this.cardPanel.add(var6, "analytics-page");
+      this.cardPanel.add(var7, "scheduler-page");
+      this.cardPanel.add(var8, "profile-page");
+      this.cardPanel.add(var9, "otherUsers-page");
       this.cardLayout.show(this.cardPanel, "Home");
-      this.history.push("WorkoutPage");
-      this.forward("Home");
+
+      this.forward("home-page");
    }
 
    Page getActivePage() {
