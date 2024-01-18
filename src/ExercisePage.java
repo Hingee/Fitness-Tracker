@@ -1,6 +1,9 @@
 package src;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -8,8 +11,13 @@ public class ExercisePage extends Page {
    public static Exercise displayItem;
    public static boolean fromPlayer;
 
+   Box var3 = Box.createHorizontalBox();
+   Box var4 = Box.createHorizontalBox();
+   JButton var5;
+
    public ExercisePage(PageManager var3) {
       super("Exercise Page", var3);
+      var5 = new JButton("Analytics");
    }
 
    public static void setDisplayItem(Exercise var0, boolean var1) {
@@ -21,6 +29,10 @@ public class ExercisePage extends Page {
    }
 
    protected JPanel getCenter() {
+      JPanel stopWatch = new JPanel();
+      stopWatch.setLayout(new GridLayout(1, 0));
+      stopWatch.add(new StopwatchButton(this, this.showBack));
+
       if (displayItem == null) {
          return new JPanel();
       } else {
@@ -66,7 +78,12 @@ public class ExercisePage extends Page {
          var2.add(var12);
 
          var1.add(var2);
+         var2.add(stopWatch);
          return var1;
       }
+   }
+
+   public void start() {
+
    }
 }
