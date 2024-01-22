@@ -10,10 +10,14 @@ public class StopwatchButton extends JPanel{
       Box var4 = Box.createHorizontalBox();
       JButton var5;
 
-      var5 = new JButton("Rest Timer");
+      var5 = new JButton("Rest Timer Set");
       var5.addActionListener((var1x) -> {
          var1.start();
       });
+      // var5 = new JButton("Rest Timer Rep");
+      // var5.addActionListener((var1x) -> {
+      //    var1.start();
+      // });
 
       var4.add(var5);
       var3.add(var4);

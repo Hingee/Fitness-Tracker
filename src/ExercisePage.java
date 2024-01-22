@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 public class ExercisePage extends Page {
    public static Exercise displayItem;
    public static boolean fromPlayer;
+   public Stopwatch setRest;
+   public boolean restingSet = false;
 
    Box var3 = Box.createHorizontalBox();
    Box var4 = Box.createHorizontalBox();
@@ -79,11 +81,20 @@ public class ExercisePage extends Page {
 
          var1.add(var2);
          var2.add(stopWatch);
+
+
          return var1;
       }
    }
 
    public void start() {
-
+      Stopwatch rest = new Stopwatch(); 
+      rest.startRinging(); 
+      try { 
+         Thread.sleep((int)displayItem.getRestMinSet()*1000*60); 
+      }  
+      catch (InterruptedException e)   { 
+      } 
+      rest.stop(); 
    }
 }
