@@ -1,4 +1,4 @@
- # Fitness-Tracker
+ # Fitness-Tracker (Currently Not Functional)
 
 This is a mobile fitness tracker app for rock climbers. 
 
